@@ -10,7 +10,7 @@ using namespace std;
 #include "AgentJsonAPI.h"
 #include "GetLocalCfg.h"
 #include "ServerAntAgentCfg.h"
-//#include "MessagePlatformClient.h"
+#include "MessagePlatformClient.h"
 
 #define SERVER_ANT_CFG_FILE_NAME "ServerAntAgent.cfg"
 #define SERVER_ANT_CFG_FILE_PATH "/etc/ServerAntAgent/"

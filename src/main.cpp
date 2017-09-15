@@ -13,7 +13,7 @@ using namespace std;
 #include "MessagePlatform.h"
 #include "FileNotifier.h"
 #include "FlowManager.h"
-//#include "MessagePlatformClient.h"
+#include "MessagePlatformClient.h"
 #include "AgentCommon.h"
 
 void destroyServerCfgObj(ServerAntAgentCfg_C * pcCfg)
@@ -106,7 +106,7 @@ INT32 ServerAntAgent()
     UINT32 reportCount = 1;
     do
     {
-//        iRet = ReportAgentIPToServer(pcCfg);
+        iRet = ReportAgentIPToServer(pcCfg);
         if (AGENT_OK != iRet)
         {
             INIT_ERROR("Report Agent ip to Server fail[%d]", iRet);
