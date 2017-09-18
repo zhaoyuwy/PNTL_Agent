@@ -45,6 +45,38 @@ size_t ReceiveResponce(void *ptr, size_t size, size_t nmemb, stringstream *pssRe
 const CHAR* ACCEPT_TYPE = "Accept:application/json";
 const CHAR* CONTENT_TYPE = "Content-Type:application/json";
 
+
+INT32 GetKafkaAccessToken(stringstream * tokenOne,stringstream * tokenTwo,stringstream *pssResponceData)
+{
+
+    INT32 iRet = AGENT_OK;
+    string strTemp;
+
+    CURL *curl;
+    CURLcode res;
+    char error_msg[CURL_ERROR_SIZE];
+    struct curl_slist *headers = NULL;
+    curl_global_init(CURL_GLOBAL_ALL);
+
+    // 创建一个curl句柄
+    curl = curl_easy_init();
+
+    curl_easy_setopt(curl, CURLOPT_HTTPHEADER, headers);
+
+
+    curl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, 0);
+
+    // 设定超时时间, 避免因为SERVER无响应而挂死.
+    res = curl_easy_setopt(curl, CURLOPT_TIMEOUT, AGENT_REQUEST_TIMEOUT);
+    if(CURLE_OK != res)
+    {
+        MSG_CLIENT_ERROR("curl easy setopt CURLOPT_TIMEOUT failed[%d][%s],detail info[%s]", res, curl_easy_strerror(res), error_msg);
+        curl_easy_cleanup(curl);
+        curl_global_cleanup();
+        return AGENT_E_ERROR;
+    }
+}
+
 // 通过http post操作提交数据
 INT32 HttpPostData(stringstream * pssUrl, stringstream * pssPostData, stringstream *pssResponceData)
 {
